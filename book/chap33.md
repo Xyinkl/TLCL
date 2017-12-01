@@ -7,8 +7,8 @@ One feature that has been missing from our programs is the ability to accept and
 command line options and arguments. In this chapter, we will examine the shell features
 that allow our programs to get access to the contents of the command line.
 
-现在我们的程序还缺少一种本领，就是接收和处理命令行选项和参数的能力。在这一章中，我们将探究一些能
-让程序访问命令行内容的 shell 性能。
+现在我们的程序还缺少接收和处理命令行选项和参数的能力。在这一章中，我们将探究一些能
+让程序访问命令行内容的 shell 特性。
 
 ### 访问命令行
 
@@ -17,7 +17,7 @@ ual words on the command line. The variables are named 0 through 9. They can be
 demonstrated this way:
 
 shell 提供了一个称为位置参数的变量集合，这个集合包含了命令行中所有独立的单词。这些变量按照从0到9给予命名。
-可以以这种方式讲明白：
+可以用以下方式被显示：
 
     #!/bin/bash
     # posit-param: script to view command line parameters
@@ -37,7 +37,7 @@ shell 提供了一个称为位置参数的变量集合，这个集合包含了�
 A very simple script that displays the values of the variables $0-$9. When executed
 with no command line arguments:
 
-一个非常简单的脚本，显示从 $0 到 $9 所有变量的值。当不带命令行参数执行该脚本时，输出结果如下：
+这是个一个非常简单的脚本，显示从 $0 到 $9 所有变量的值。当不带参数执行该命令时，输出结果如下：
 
     [me@linuxbox ~]$ posit-param
     $0 = /home/me/bin/posit-param
@@ -55,8 +55,8 @@ Even when no arguments are provided, $0 will always contain the first item appea
 the command line, which is the pathname of the program being executed. When argu-
 ments are provided, we see the results:
 
-即使不带命令行参数，位置参数 $0 总会包含命令行中出现的第一个单词，也就是已执行程序的路径名。
-当带参数执行脚本时，我们看看输出结果：
+即使不带命令行参数，位置参数 $0 也总会包含命令行中出现的第一个单词，也就是已执行程序的路径名。
+当带参数执行时，我们看看输出结果：
 
     [me@linuxbox ~]$ posit-param a b c d
     $0 = /home/me/bin/posit-param
@@ -74,7 +74,7 @@ Note: You can actually access more than nine parameters using parameter expan-
 sion. To specify a number greater than nine, surround the number in braces. For ex-
 ample ${10}, ${55}, ${211}, and so on.
 
-注意： 实际上通过参数展开方式你可以访问的参数个数多于9个。只要指定一个大于9的数字，用花括号把该数字括起来就可以。
+注意： 实际上通过参数展开的方式你可以访问的参数个数多于9个。需访问一个大于9的的参数，用花括号把该数字括起来就可以。
 例如 ${10}、 ${55}、 ${211}等等。
 
 #### 确定参数个数
@@ -210,10 +210,9 @@ automatically adjusts to contain the name of the program.
 
 这个程序显示一个具体文件的文件类型（由 file 命令确定）和文件状态（来自 stat 命令）。该程序一个有意思
 的特点是 PROGNAME 变量。它的值就是 basename $0 命令的执行结果。这个 basename 命令清除
-一个路径名的开头部分，只留下一个文件的基本名称。在我们的程序中，basename 命令清除了包含在 $0 位置参数
-中的路径名的开头部分，$0 中包含着我们示例程序的完整路径名。当构建提示信息正如程序结尾的使用信息的时候，
-basename $0 的执行结果就很有用处。按照这种方式编码，可以重命名该脚本，且程序信息会自动调整为
-包含相应的程序名称。
+路径名的开头部分，只留下一个文件的基本名称。在我们的程序中，basename 命令清除了$0 参数
+中的路径名的开头部分，只留下文件名。当构建提示信息，例如正如本程序结尾的使用信息的时候，
+basename $0 的执行结果就很有用处。按照这种方式编码，就可以对脚本做调整，并且使提示信息能够包含程序名。
 
 #### Shell 函数中使用位置参数
 
